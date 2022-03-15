@@ -21,14 +21,11 @@ const resolvers = {
 
     Mutation:{
     
-        createNewuser:(_,{firstname,identity,email,pass})=>{
+        createNewuser:(_,{newUser})=>{
             const id =randomBytes(5).toString("hex")
             users.push({
                 id,
-                firstname,
-                identity,
-                email,
-                pass
+                ...newUser
             })
 
             return (users.find(user=>user.id==id))

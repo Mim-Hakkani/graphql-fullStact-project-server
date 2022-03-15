@@ -29,11 +29,15 @@ type Quote{
 
 
 type Mutation{
-       createNewuser(
+       createNewuser(newUser:userInput):User
+        
+}
+
+input userInput{
         firstname:String!,
         identity:String!,
         email:String!,
-        pass:String!):User
+        pass:String!
 }
 
 `
