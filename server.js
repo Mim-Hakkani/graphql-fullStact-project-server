@@ -17,13 +17,14 @@ type User{
     firstname:String
     identity:String
     email:String
-    pass:String,
+    pass:String
     quotes:[Quote]
 }
 
 type Quote{
     name:String
     by:String
+    users:[User]
 }
 
 `
@@ -38,6 +39,10 @@ const resolvers = {
 
     User:{
         quotes:(ur)=>quotes.filter(quote=>quote.by==ur.id)
+    },
+
+    Quote:{
+        users:(quoteid)=>users.filter(allusers=>allusers.id==quoteid.by)
     }
 }
 
