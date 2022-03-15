@@ -1,14 +1,15 @@
 import { gql,ApolloServer } from "apollo-server";
 import {ApolloServerPluginLandingPageGraphQLPlayground} from  "apollo-server-core";
 
-import {users} from './fakedata.js' 
+import {users,quotes} from './fakedata.js' 
 
 //create a simple schema 
 
 const typeDefs =gql`
 
 type Query{
-    users:[User]
+    users:[User],
+    quotes:[Quote]
 }
 
 type User{
@@ -16,7 +17,13 @@ type User{
     firstname:String
     identity:String
     email:String
-    pass:String 
+    pass:String,
+    quotes:[Quote]
+}
+
+type Quote{
+    name:String
+    by:String
 }
 
 `
@@ -25,7 +32,12 @@ type User{
 
 const resolvers = {
     Query:{
-        users:()=>users
+        users:()=>users,
+        quotes:()=>quotes
+    },
+
+    User:{
+        quotes:(ur)=>quotes.filter(quote=>quote.by==ur.id)
     }
 }
 
