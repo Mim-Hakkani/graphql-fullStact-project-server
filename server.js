@@ -10,7 +10,9 @@ const typeDefs =gql`
 type Query{
     users:[User]
     user(id:ID!):User
+
     quotes:[Quote]
+    quote(by:ID!):[Quote]
 }
 
 type User{
@@ -36,7 +38,8 @@ const resolvers = {
     Query:{
         users:()=>users,
         user:(_,{id})=>users.find(singleuser=>singleuser.id==id),
-        quotes:()=>quotes
+        quotes:()=>quotes,
+        quote:(_,{by})=>quotes.filter(quotess=>quotess.by==by)
     },
 
     User:{
