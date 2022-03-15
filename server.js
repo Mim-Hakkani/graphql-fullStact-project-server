@@ -21,7 +21,13 @@ const resolvers = {
 
 //setup the applo server 
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ 
+    typeDefs,
+    resolvers ,
+    plugins:[
+        ApolloServerPluginLandingPageGraphQLPlayground()
+    ]
+});
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
