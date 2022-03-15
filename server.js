@@ -8,12 +8,13 @@ import {users,quotes} from './fakedata.js'
 const typeDefs =gql`
 
 type Query{
-    users:[User],
+    users:[User]
+    user(id:ID!):User
     quotes:[Quote]
 }
 
 type User{
-    id:ID
+    id:ID!
     firstname:String
     identity:String
     email:String
@@ -34,6 +35,7 @@ type Quote{
 const resolvers = {
     Query:{
         users:()=>users,
+        user:(_,{id})=>users.find(singleuser=>singleuser.id==id),
         quotes:()=>quotes
     },
 
