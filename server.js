@@ -1,11 +1,22 @@
 import { gql,ApolloServer } from "apollo-server";
-import {ApolloServerPluginLandingPageGraphQLPlayground} from  "apollo-server-core"
+import {ApolloServerPluginLandingPageGraphQLPlayground} from  "apollo-server-core";
+
+import {users} from './fakedata.js' 
 
 //create a simple schema 
 
 const typeDefs =gql`
+
 type Query{
-    greet : String
+    users:[User]
+}
+
+type User{
+    id:ID
+    firstname:String
+    identity:String
+    email:String
+    pass:String 
 }
 
 `
@@ -14,7 +25,7 @@ type Query{
 
 const resolvers = {
     Query:{
-        greet:()=>"hellow world"
+        users:()=>users
     }
 }
 
