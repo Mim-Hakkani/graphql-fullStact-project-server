@@ -1,4 +1,5 @@
 import {users,quotes} from './fakedata.js' 
+import {randomBytes} from 'crypto'
 //create a  resolvers for calculations in query ,mutaion ,and subscriptions 
 
 const resolvers = {
@@ -15,6 +16,23 @@ const resolvers = {
 
     Quote:{
         users:(quoteid)=>users.filter(allusers=>allusers.id==quoteid.by)
+    },
+
+
+    Mutation:{
+    
+        createNewuser:(_,{firstname,identity,email,pass})=>{
+            const id =randomBytes(5).toString("hex")
+            users.push({
+                id,
+                firstname,
+                identity,
+                email,
+                pass
+            })
+
+            return (users.find(user=>user.id==id))
+        }
     }
 }
 

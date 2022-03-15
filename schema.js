@@ -27,6 +27,15 @@ type Quote{
     users:[User]
 }
 
+
+type Mutation{
+       createNewuser(
+        firstname:String!,
+        identity:String!,
+        email:String!,
+        pass:String!):User
+}
+
 `
 
 export default typeDefs;
