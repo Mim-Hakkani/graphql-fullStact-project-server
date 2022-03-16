@@ -1,0 +1,1 @@
+export const mongo_uri="mongodb+srv://mimgraphql:150132@cluster0.rfbry.mongodb.net/graphqldb?retryWrites=true&w=majority"

@@ -3,8 +3,23 @@ import {ApolloServerPluginLandingPageGraphQLPlayground} from  "apollo-server-cor
 
 import typeDefs from './schema.js'
 import resolvers from './resolvers.js'
+import mongoose from "mongoose";
+import { mongo_uri } from "./config.js";
 
 
+//connect with mongoose 
+mongoose.connect(mongo_uri),{
+  useNewUrlParse:true,
+  useUnifieldTopology:true
+}
+
+mongoose.connection.on("connected",()=>{
+  console.log("mongodb is successfully connected")
+})
+
+mongoose.connection.on("erroe",(err)=>{
+  console.log("error conntecting",err);
+})
 
 
 
@@ -22,3 +37,5 @@ const server = new ApolloServer({
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
+
+
