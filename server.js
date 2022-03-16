@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server";
 import {ApolloServerPluginLandingPageGraphQLPlayground} from  "apollo-server-core";
 
 import typeDefs from './schema.js'
-import resolvers from './resolvers.js'
+
 import mongoose from "mongoose";
 import { mongo_uri } from "./config.js";
 
@@ -22,6 +22,13 @@ mongoose.connection.on("erroe",(err)=>{
 })
 
 
+//models is here 
+
+import './models/users.js'
+import './models/quotes.js'
+
+import resolvers from './resolvers.js'
+import { users } from "./fakedata.js";
 
 //setup the applo server 
 
