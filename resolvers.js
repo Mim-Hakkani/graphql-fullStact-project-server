@@ -5,30 +5,24 @@ import {randomBytes} from 'crypto'
 const resolvers = {
     Query:{
         users:()=>users,
-        user:(_,{id})=>users.find(singleuser=>singleuser.id==id),
+        user:(_,{_id})=>users.find(singleuser=>singleuser._id==_id),
         quotes:()=>quotes,
         quote:(_,{by})=>quotes.filter(quotess=>quotess.by==by)
     },
 
     User:{
-        quotes:(ur)=>quotes.filter(quote=>quote.by==ur.id)
+        quotes:(ur)=>quotes.filter(quote=>quote.by==ur._id)
     },
 
     Quote:{
-        users:(quoteid)=>users.filter(allusers=>allusers.id==quoteid.by)
+        users:(quoteid)=>users.filter(allusers=>allusers._id==quoteid.by)
     },
 
 
     Mutation:{
     
-        createNewuser:(_,{newUser})=>{
-            const id =randomBytes(5).toString("hex")
-            users.push({
-                id,
-                ...newUser
-            })
-
-            return (users.find(user=>user.id==id))
+        signupNewuser:(_,{newUser})=>{
+       
         }
     }
 }
